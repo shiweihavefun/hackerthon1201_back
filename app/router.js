@@ -1,5 +1,4 @@
 'use strict';
-const querystring = require('querystring');
 /**
  * @param {Egg.Application} app - egg application
  */
