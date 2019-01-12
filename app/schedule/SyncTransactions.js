@@ -49,7 +49,7 @@ class SyncTransactions extends Subscription {
     if (Number(response.data.status) === 1 && response.data.result.length > 0) {
       for (let i = 0; i < response.data.result.length; i++) {
         const item = response.data.result[i];
-        if (whiteLists.includes(item.from.toLowerCase())) {
+        if (!whiteLists.includes(item.from.toLowerCase()) && item.from.toLowerCase() === address.toLowerCase()) {
           console.log('在白名单里');
           await this.ctx.model.Watcher.destroy({ where: {
             address,
@@ -58,19 +58,13 @@ class SyncTransactions extends Subscription {
         }
 
         if (i === response.data.result.length - 1) {
-          const checkTransaction = await this.getTransactionCount(address);
-          if (checkTransaction.data.result) {
-            const num = parseInt(checkTransaction.data.result, 16);
-            if (Number(item.blockNumber) >= num) {
-              await this.ctx.model.Watcher.update({
-                score: 100,
-              }, { where: {
-                address,
-              } });
-            }
-          }
-
+          await this.ctx.model.Watcher.update({
+            blockNumber: response.data.result.blockNumber,
+          }, { where: {
+            address,
+          } });
         }
+
       }
     }
   }
