@@ -51,20 +51,20 @@ class SyncTransactions extends Subscription {
         const item = response.data.result[i];
         if (whiteLists.includes(item.from.toLowerCase())) {
           console.log('在白名单里');
-          await this.ctx.model.Watcher.update({
-            score: 100,
-          }, { where: {
+          await this.ctx.model.Watcher.destroy({ where: {
             address,
           } });
-
           break;
         }
+
         if (i === response.data.result.length - 1) {
           const checkTransaction = await this.getTransactionCount(address);
           if (checkTransaction.data.result) {
             const num = parseInt(checkTransaction.data.result, 16);
             if (Number(item.blockNumber) >= num) {
-              await this.ctx.model.Watcher.destroy({ where: {
+              await this.ctx.model.Watcher.update({
+                score: 100,
+              }, { where: {
                 address,
               } });
             }

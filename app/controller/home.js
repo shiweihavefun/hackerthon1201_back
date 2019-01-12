@@ -26,7 +26,8 @@ class HomeController extends Controller {
       let blackIncome = 0;
       let blackLists = require('../../data.json');
       blackLists = Object.keys(blackLists).map(item => item.toLowerCase());
-      const watchers = this.ctx.model.Watcher.findAll({ where: { score: 0 } }); // 从数据库里拿到所有score等于0的watchers对象
+      const whiteWatchers = this.ctx.model.Watcher.findAll({ where: { score: 0 } }); // 从数据库里拿到所有score等于0的watchers对象
+      const blackWatchers = this.ctx.model.Watcher.findAll({ where: { score: 100 } });
       for (let i = 0; i < result.length; i++) {
         const item = result[i];
         // 只处理transaction的value大于0的事务
@@ -38,14 +39,17 @@ class HomeController extends Controller {
               amount: item.value,
             };
             // 过滤所有watchers对象里和当前事务来源地址相同的,用来判断是否是白名单内的数据
-            const checkWatchers = watchers.filter(watcher => {
+            const checkWatchers = whiteWatchers.filter(watcher => {
+              return watcher.address.toLowerCase() === item.from.toLowerCase();
+            });
+            const checkBlackWatchers = blackWatchers.filter(watcher => {
               return watcher.address.toLowerCase() === item.from.toLowerCase();
             });
             // 判断是否在当前黑名单内
-            if (blackLists.includes(item.from.toLowerCase())) {
+            if (checkBlackWatchers.length > 0) {
               blackIncome = new BigNumber(blackIncome).plus(item.value);
               tx.type = 3;
-            } else if (checkWatchers.length > 0) { // 如果checkWatchers大于0说明是已知的事务
+            } else if (checkWatchers.length > 0 || blackLists.includes(item.from.toLowerCase())) { // 如果checkWatchers大于0说明是已知的事务
               cleanIncome = new BigNumber(cleanIncome).plus(item.value);
               tx.type = 2;
             } else {
