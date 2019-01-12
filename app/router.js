@@ -1,14 +1,14 @@
 'use strict';
-
+const querystring = require('querystring');
 /**
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
   const { router, controller } = app;
   router.get('/test', async ctx => {
-    ctx.model.Watcher.create({
-      address: '0x000000',
-      score: 0,
-    });
+    await app.runSchedule('SyncTransactions');
+
   });
+
+  router.post('/api/score', controller.home.score);
 };

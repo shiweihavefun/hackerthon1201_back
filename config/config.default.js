@@ -9,6 +9,12 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [];
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
   config.sequelize = {
     dialect: 'mysql',
     host: '47.88.156.161',
@@ -23,6 +29,8 @@ module.exports = appInfo => {
   };
 
   config.web3_socket = 'wss://rinkeby.infura.io/ws';
+
+  config.etherscan_url = 'https://api-rinkeby.etherscan.io/api';
 
   return config;
 };
