@@ -25,8 +25,8 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-hackerthon1201_back",
-    "stop": "egg-scripts stop --title=egg-server-hackerthon1201_back",
+    "start": "egg-scripts start --port=6666 --daemon --title=egg-server-hackerthon1201_back",
+    "stop": "egg-scripts stop --port=6666 --title=egg-server-hackerthon1201_back",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
