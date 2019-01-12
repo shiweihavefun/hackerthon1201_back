@@ -22,7 +22,7 @@ module.exports = appInfo => {
     },
   };
 
-  config.web3_socket = 'wss://mainnet.infura.io/ws';
+  config.web3_socket = 'wss://rinkeby.infura.io/ws';
 
   return config;
 };

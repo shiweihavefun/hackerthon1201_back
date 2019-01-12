@@ -17,6 +17,8 @@ module.exports = agent => {
       subsriber.watch(watcher.dataValues.address)
         .then(res => {
           console.log(res);
+        }).catch(e => {
+          console.log(e);
         });
     }
   });

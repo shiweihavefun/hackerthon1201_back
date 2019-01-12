@@ -5,5 +5,10 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/test', controller.home.index);
+  router.get('/test', async ctx => {
+    ctx.model.Watcher.create({
+      address: '0x000000',
+      score: 0,
+    });
+  });
 };

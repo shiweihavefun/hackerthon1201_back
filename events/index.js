@@ -15,6 +15,7 @@ module.exports = class Subscriber extends EventEmitter {
 
   async watch(address) {
     return new Promise((resolve, reject) => {
+      console.log('watching...');
       this.web3.eth.subscribe('logs', { address }, (error, result) => {
         if (error) {
           reject(error);
