@@ -6,7 +6,7 @@ class SyncTransactions extends Subscription {
 
   static get schedule() {
     return {
-      interval: '10m', // 表示一分钟执行一次
+      interval: '1m', // 表示一分钟执行一次
       type: 'all',
     };
   }
@@ -33,7 +33,7 @@ class SyncTransactions extends Subscription {
       page: 1,
       offset: 50,
       sort: 'sort',
-      apikey: '5WQKCTS7RDXFNI89136JKE3HKASE6WPZMA',
+      apikey: this.app.config.etherscan_key,
     };
 
     const requestURI = this.app.config.etherscan_url;
@@ -81,7 +81,7 @@ class SyncTransactions extends Subscription {
       module: 'proxy',
       action: 'eth_getTransactionCount',
       tag: 'latest',
-      apikey: '5WQKCTS7RDXFNI89136JKE3HKASE6WPZMA',
+      apikey: this.app.config.etherscan_key,
     };
 
     const requestURI = this.app.config.etherscan_url;
