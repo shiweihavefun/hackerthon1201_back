@@ -6,10 +6,7 @@ const querystring = require('querystring');
 module.exports = app => {
   const { router, controller } = app;
   router.get('/test', async ctx => {
-    const watchers = await ctx.model.Watcher.findAll();
-    console.log(watchers.filter(item => {
-      return item.address === '1';
-    }));
+
   });
 
   router.post('/api/score', controller.home.score);
