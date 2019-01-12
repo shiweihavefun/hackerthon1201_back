@@ -60,8 +60,14 @@ class HomeController extends Controller {
           }
         }
       }
-      console.log(new BigNumber(100).multipliedBy(unknownIncome).dividedBy(new BigNumber(unknownIncome).plus(cleanIncome)));
-      const score = blackIncome > 0 ? 100 : new BigNumber(100).multipliedBy(unknownIncome).dividedBy(new BigNumber(unknownIncome).plus(cleanIncome));
+      let score = 0;
+      if (blackIncome > 0) {
+        score = 100;
+      } else {
+        score = new BigNumber(100).multipliedBy(unknownIncome).dividedBy(new BigNumber(unknownIncome).plus(cleanIncome))
+          .toString(10);
+      }
+      score = Number(score).toFixed(0);
       this.ctx.body = {
         score,
         transactions,
