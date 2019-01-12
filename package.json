@@ -4,6 +4,7 @@
   "description": "",
   "private": true,
   "dependencies": {
+    "bignumber.js": "^8.0.1",
     "egg": "^2.2.1",
     "egg-scripts": "^2.5.0",
     "egg-sequelize": "^4.3.1",

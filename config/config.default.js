@@ -28,9 +28,15 @@ module.exports = appInfo => {
     },
   };
 
+  config.httpclient = {
+    httpAgent: {
+      timeout: 9999999999,
+    },
+  };
+
   config.web3_socket = 'wss://mainnet.infura.io/ws';
 
-  config.etherscan_url = 'https://api.etherscan.io/api';
+  config.etherscan_url = 'http://api-rinkeby.etherscan.io/api';
   config.etherscan_key = '5WQKCTS7RDXFNI89136JKE3HKASE6WPZMA';
 
   return config;
