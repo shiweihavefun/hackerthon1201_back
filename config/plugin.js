@@ -8,5 +8,10 @@ exports.sequelize = {
 };
 
 exports.security = {
-  enable: false,
+  domainWhiteList: [ '*' ],
+};
+
+exports.cors = {
+  enable: true,
+  package: 'egg-cors',
 };

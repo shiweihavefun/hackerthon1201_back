@@ -6,6 +6,7 @@
   "dependencies": {
     "bignumber.js": "^8.0.1",
     "egg": "^2.2.1",
+    "egg-cors": "^2.1.2",
     "egg-scripts": "^2.5.0",
     "egg-sequelize": "^4.3.1",
     "mysql2": "^1.6.4",
